@@ -151,6 +151,7 @@ def beaver(f):
     # But the specification says you can't use numbers or strings.
     # So I guess maybe other iterable things? I don't know...
     # Maybe something like files or time
+    # Maybe use lambda expression for recursion
     # build-in functions https://docs.python.org/3/library/functions.html 
     # of course maybe the solution don't use list comprehension
 
