@@ -2,7 +2,7 @@
 
 https://inst.eecs.berkeley.edu/~cs61a/fa22/
 
-practiced about higher function, frames and improved my python skill
+practiced  higher function, frames and improved my python skill
 
 ### TODO
 - week3 
@@ -16,7 +16,6 @@ practiced about higher function, frames and improved my python skill
 	- cats
 - week6
 	- trees
-	- mutability
 	- syntax
 	- ch2.4
 	- ch2.3
@@ -27,8 +26,6 @@ practiced about higher function, frames and improved my python skill
 	- ch4.2
 	- iterators
 	- generators
-	- objects
-	- lab06
 	- disc06
 	- hw05
 - week8
@@ -52,7 +49,6 @@ practiced about higher function, frames and improved my python skill
 	- lab09
 	- midterm2
 	- scheme
-	- ch3.1
 	- hw07
 - week11
 	- scheme lists
@@ -78,7 +74,6 @@ practiced about higher function, frames and improved my python skill
 	- lab12
 	- disc12
 	- scheme contest
-	- ==hw10==
 - week15
 	- final examples
 	- ==lab13==
