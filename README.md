@@ -70,6 +70,6 @@ https://inst.eecs.berkeley.edu/~cs61a/fa22/
 	- disc13
 - week17
 	- final https://cs61a.org/resources/
-2.3 2.4 2.5 2.6 2.7 2.8 2.9
+2.4 2.5 2.6 2.7 2.8 2.9
 3.2 3.3 3.4 3.5
 4.2 4.3 4.4 4.5
