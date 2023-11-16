@@ -170,17 +170,14 @@ def feline_fixes(typed, source, limit):
     >>> feline_fixes("rose", "hello", big_limit)   # Substitute: r->h, o->e, s->l, e->l, length difference of 1.
     5
     """
-    # BEGIN PROBLEM 6
-    if limit == 0:
-        return 0 if typed == source else 1 
+    # BEGIN PROBLEM 6 
+
+    if limit < 0:  
+        return 0
 
     if len(typed) == 0 or len(source) == 0:
         return abs(len(typed) - len(source))
-    
-    if limit == abs(len(typed) - len(source)): #quick exit
-        return limit + 1
-    
-    if typed[0] != source[0] :
+    elif typed[0] != source[0] :
         return 1 + feline_fixes(typed[1:], source[1:], limit-1)
     else:
         return feline_fixes(typed[1:], source[1:], limit)
@@ -203,28 +200,39 @@ def minimum_mewtations(start, goal, limit):
     >>> minimum_mewtations("ckiteus", "kittens", big_limit) # ckiteus -> kiteus -> kitteus -> kittens
     3
     """
-    assert False, 'Remove this line'
-    if ______________:  # Fill in the condition
-        # BEGIN
-        "*** YOUR CODE HERE ***"
-        # END
-    elif ___________:  # Feel free to remove or add additional cases
-        # BEGIN
-        "*** YOUR CODE HERE ***"
-        # END
+    if len(start) * len(goal) == 0: 
+        return max(len(goal), len(start))
+    if limit < 0:   # pruning
+        return 9999
+    
+    if start[0] == goal[0]:
+        return minimum_mewtations(start[1:], goal[1:], limit)
     else:
-        add = ...  # Fill in these lines
-        remove = ...
-        substitute = ...
-        # BEGIN
-        "*** YOUR CODE HERE ***"
-        # END
-
+        way_add = 1 + minimum_mewtations(start, goal[1:], limit-1)
+        way_delete = 1 + minimum_mewtations(start[1:], goal, limit-1)
+        way_substitute = 1 + minimum_mewtations(start[1:], goal[1:], limit-1)
+    return min(way_add, way_delete, way_substitute)
 
 def final_diff(typed, source, limit):
     """A diff function that takes in a string TYPED, a string SOURCE, and a number LIMIT.
     If you implement this function, it will be used."""
-    assert False, 'Remove this line to use your final_diff function.'
+    if len(typed) * len(source) == 0: 
+        return max(len(source), len(typed))
+    if limit < 0:   # pruning
+        return 9999
+    
+    if typed[0] == source[0]:
+        return minimum_mewtations(typed[1:], source[1:], limit)
+    else:
+        way_add = 1 + minimum_mewtations(typed, source[1:], limit-1)
+        way_delete = 1 + minimum_mewtations(typed[1:], source, limit-1)
+        way_substitute = 1 + minimum_mewtations(typed[1:], source[1:], limit-1)
+        way_leftright_substitute = 9999
+        if len(typed) > 1:
+            strs = typed[1] + typed[0] + typed[2:]
+            way_leftright_substitute = 1 + minimum_mewtations(strs,source,limit-1) 
+    return min(way_add, way_delete, way_substitute,way_leftright_substitute)
+    #return minimum_mewtations(typed,source,limit)
 
 
 FINAL_DIFF_LIMIT = 6  # REPLACE THIS WITH YOUR LIMIT
@@ -259,7 +267,15 @@ def report_progress(typed, prompt, user_id, upload):
     0.2
     """
     # BEGIN PROBLEM 8
-    "*** YOUR CODE HERE ***"
+    score = len(typed)
+    for i in range(len(typed)):
+        if typed[i] != prompt[i]:
+            score = i
+            break
+    progress = score/len(prompt)
+    message = {'id': str(user_id),'progress': progress}
+    upload(message)
+    return progress
     # END PROBLEM 8
 
 
@@ -281,7 +297,8 @@ def time_per_word(words, times_per_player):
     [[6, 3, 6, 2], [10, 6, 1, 2]]
     """
     # BEGIN PROBLEM 9
-    "*** YOUR CODE HERE ***"
+    times = [[ times_per_player[i][j+1] - times_per_player[i][j] for j in range(len(times_per_player[i])-1) ] for i in range(len(times_per_player))]
+    return match(words,times)
     # END PROBLEM 9
 
 
@@ -303,7 +320,15 @@ def fastest_words(match):
     player_indices = range(len(get_all_times(match)))  # contains an *index* for each player
     word_indices = range(len(get_all_words(match)))    # contains an *index* for each word
     # BEGIN PROBLEM 10
-    "*** YOUR CODE HERE ***"
+    times = get_all_times(match)
+    res = [[] for _ in player_indices]
+    for i in word_indices:
+        min_index, min_val = 0, 9999
+        for j in player_indices:
+            if times[j][i] < min_val:
+                min_index, min_val = j, times[j][i]
+        res[min_index].append(get_word(match,i))
+    return res
     # END PROBLEM 10
 
 

@@ -11,30 +11,18 @@ https://inst.eecs.berkeley.edu/~cs61a/fa22/
 	 - lab03 Q2 Q5 Q6 Q7 Q8  
 - week4
 	- midterm1   simulation 12345 exam1  https://cs61a.org/resources/
-- week5
-	- cats Q6 Q7 Q8 Q9 Q10
 - week6
-	- trees
-	- syntax
-	- ch2.4
 	- lab05
 	- disc05
 	- hw4
 - week7
-	- ch4.2
 	- disc06
 	- hw05
 - week8
-	- ch2.5
-	- ch2,7
-	- composition
 	- disc07
 	- ants
-	- hw06
 - week9
-	- efficiency
-	- data examples
-	- ch2.8
+	- ==data examples==
 	- lab08
 	- disc08
 - week10
@@ -70,6 +58,6 @@ https://inst.eecs.berkeley.edu/~cs61a/fa22/
 	- disc13
 - week17
 	- final https://cs61a.org/resources/
-2.4 2.5 2.6 2.7 2.8 2.9
+2.4
 3.2 3.3 3.4 3.5
 4.2 4.3 4.4 4.5
