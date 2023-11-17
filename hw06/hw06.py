@@ -199,7 +199,26 @@ def is_bst(t):
     False
     """
     
+    if len(t.branches) > 2:
+        return False
+    elif len(t.branches) == 0:
+        return True
+    elif len(t.branches) == 1:
+        min_val = bst_most(t.branches[0],min)
+        max_val = bst_most(t.branches[0],max)
+        return (not(min_val < t.label and t.label < max_val)) and is_bst(t.branches[0]) 
+    else:   # len == 2
+        res = t.label <= bst_most(t.branches[1],min) and t.label >= bst_most(t.branches[0],max)
+        for sub_tree in t.branches:
+            res = res and is_bst(sub_tree)
+        return res
     
+def bst_most(t,func):
+    if t.is_leaf():
+        return t.label
+    most_subtree = func([bst_most(subtree,func)for subtree in t.branches])
+    return func(t.label,most_subtree)
+
 
 class Link:
     """A linked list.
