@@ -12,19 +12,11 @@ https://inst.eecs.berkeley.edu/~cs61a/fa22/
 - week4
 	- midterm1   simulation 12345 exam1  https://cs61a.org/resources/
 - week6
-	- lab05
-	- disc05
 	- hw4
 - week7
-	- disc06
 	- hw05
 - week8
-	- disc07
 	- ants
-- week9
-	- ==data examples==
-	- lab08
-	- disc08
 - week10
 	- lab09
 	- midterm2 https://cs61a.org/resources/
@@ -41,8 +33,7 @@ https://inst.eecs.berkeley.edu/~cs61a/fa22/
 	- interpreters
 	- ch3.5
 	- hw08
-	- scheme
-	- scheme challenge
+	- scheme/scheme challenge
 - week12
 	- tail calls
 	- program as data

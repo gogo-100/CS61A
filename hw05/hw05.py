@@ -98,7 +98,14 @@ def hailstone(n):
     >>> next(hail_gen)
     1
     """
-    "*** YOUR CODE HERE ***"
+    while True:
+        yield n
+        if n % 2 == 0:
+            n //= 2
+        elif n == 1:
+            continue
+        else:
+            n = 3 * n + 1
 
 
 def remainders_generator(m):
@@ -132,7 +139,8 @@ def remainders_generator(m):
     7
     11
     """
-    "*** YOUR CODE HERE ***"
+    for i in range(m):
+        yield 
 
 
 # Tree ADT
