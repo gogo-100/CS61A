@@ -11,10 +11,8 @@ https://inst.eecs.berkeley.edu/~cs61a/fa22/
 	 - lab03 Q2 Q5 Q6 Q7 Q8  
 - week4
 	- midterm1   simulation 12345 exam1  https://cs61a.org/resources/
-- week6
-	- hw4
 - week7
-	- hw05
+	- hw05 Q2 Q3 Q5
 - week8
 	- ants
 - week10
@@ -24,14 +22,10 @@ https://inst.eecs.berkeley.edu/~cs61a/fa22/
 	- hw07
 - week11
 	- scheme lists
-	- ch3,2
-	- ch3.3
-	- ch3,4
 	- lab10
 	- calaculator
 	- disc10
 	- interpreters
-	- ch3.5
 	- hw08
 	- scheme/scheme challenge
 - week12
@@ -49,6 +43,4 @@ https://inst.eecs.berkeley.edu/~cs61a/fa22/
 	- disc13
 - week17
 	- final https://cs61a.org/resources/
-2.4
-3.2 3.3 3.4 3.5
-4.2 4.3 4.4 4.5
+2.4 4.2
