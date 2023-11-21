@@ -2,8 +2,8 @@
 
 https://inst.eecs.berkeley.edu/~cs61a/fa22/
 
-深入理解了高阶函数，frame等概念，并提高了python技能。
-逐渐习惯于使用list comprehension, any/all等提高表达力的技巧✌️✌️
+深入理解练习使用了高阶函数，lambda表达式，yield等，并提高了python技能。
+逐渐习惯于使用list comprehension, any/all等提高表达力的技巧.
 
 ### TODO
 - week3 
@@ -12,14 +12,12 @@ https://inst.eecs.berkeley.edu/~cs61a/fa22/
 - week4
 	- midterm1   simulation 12345 exam1  https://cs61a.org/resources/
 - week7
-	- hw05 Q2 Q3 Q5
+	- hw05 Q2 Q3
 - week8
 	- ants
 - week10
 	- lab09
 	- midterm2 https://cs61a.org/resources/
-	- scheme
-	- hw07
 - week11
 	- scheme lists
 	- lab10

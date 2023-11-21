@@ -45,7 +45,11 @@ def gen_perms(seq):
     >>> sorted(gen_perms("ab"))
     [['a', 'b'], ['b', 'a']]
     """
-    "*** YOUR CODE HERE ***"
+    for i in range(len(seq)):
+        yield seq[i]
+        yield from gen_perms(seq[:i] + seq[i+1:])
+        
+    
 
 
 def yield_paths(t, value):
@@ -139,8 +143,13 @@ def remainders_generator(m):
     7
     11
     """
-    for i in range(m):
-        yield 
+    def m_generator(m,init):
+        n = m if init == 0 else init
+        while True:
+            yield n
+            n += m
+    for i in range(0,m):
+        yield m_generator(m,i)
 
 
 # Tree ADT
