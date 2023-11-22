@@ -15,7 +15,7 @@ ok
 .ok_storage.bak
 .ok_storage.dir
 .ok_storage.dat
-
+editor/
 
 # Distribution / packaging
 .Python
