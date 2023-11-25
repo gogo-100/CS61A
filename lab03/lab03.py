@@ -56,12 +56,12 @@ def get_k_run_starter(n, k):
     """
     i = 0
     final = None
-    while ____________________________:
-        while ____________________________:
-            ____________________________
-        final = ____________________________
-        i = ____________________________
-        n = ____________________________
+    while i <= k :
+        while n > 10 and n % 10 > n // 10 % 10:
+            n = n // 10
+        final = n % 10
+        i = i + 1
+        n = n // 10
     return final
 
 
@@ -123,9 +123,9 @@ def div_by_primes_under(n):
     checker = lambda x: False
     i = 2
     while i < n:
-        if not checker(i):
-            checker = (lambda f, i: lambda x: __________)(checker, i)
-        i = ____________________________
+        if not checker(i): # 检查素数，同时只有素数用来检查
+            checker = (lambda f, i: lambda x: x % i == 0 or f(x))(checker, i)
+        i = i + 1
     return checker
 
 
@@ -145,11 +145,11 @@ def div_by_primes_under_no_lambda(n):
     i = 2
     while i < n:
         if not checker(i):  # 检查素数，同时只有素数用来检查
-            def outer(func):
+            def outer(func,i):
                 def inner(x):
-                    return x % i == 0 
-                return inner
-            checker = outer(checker())
+                    return x % i == 0 or func(x)
+                return inner    
+            checker = outer(checker,i)
         i = i + 1
     return checker
 
@@ -164,12 +164,12 @@ def successor(n):
 
 def one(f):
     """Church numeral 1: same as successor(zero)"""
-    "*** YOUR CODE HERE ***"
+    return lambda x: f(x)
 
 
 def two(f):
     """Church numeral 2: same as successor(successor(zero))"""
-    "*** YOUR CODE HERE ***"
+    return lambda x: f(f(x))
 
 
 three = successor(two)
@@ -187,7 +187,7 @@ def church_to_int(n):
     >>> church_to_int(three)
     3
     """
-    "*** YOUR CODE HERE ***"
+    return n(lambda x: x + 1)(0)
 
 
 def add_church(m, n):
@@ -196,7 +196,7 @@ def add_church(m, n):
     >>> church_to_int(add_church(two, three))
     5
     """
-    "*** YOUR CODE HERE ***"
+    return lambda f : lambda x: m(f)(x) + n(f)(x)
 
 
 def mul_church(m, n):
@@ -208,7 +208,7 @@ def mul_church(m, n):
     >>> church_to_int(mul_church(three, four))
     12
     """
-    "*** YOUR CODE HERE ***"
+    return lambda f : lambda x: m(f)(x) * n(f)(x)
 
 
 def pow_church(m, n):
@@ -219,4 +219,4 @@ def pow_church(m, n):
     >>> church_to_int(pow_church(three, two))
     9
     """
-    "*** YOUR CODE HERE ***"
+    return n(m)

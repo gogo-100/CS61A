@@ -6,9 +6,6 @@ https://inst.eecs.berkeley.edu/~cs61a/fa22/
 逐渐习惯于使用list comprehension, any/all等提高表达力的技巧.
 
 ### TODO
-- week3 
-	 - disc02
-	 - lab03 Q2 Q5 Q6 Q7 Q8  
 - week4
 	- midterm1   simulation 12345 exam1  https://cs61a.org/resources/
 - week7
