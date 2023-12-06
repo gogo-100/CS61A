@@ -12,11 +12,9 @@ https://inst.eecs.berkeley.edu/~cs61a/fa22/
 	- midterm1   simulation 12345 exam1  https://cs61a.org/resources/
 	- midterm2 https://cs61a.org/resources/
 	- final https://cs61a.org/resources/
-- week7
+- phase2
 	- hw05 Q2 Q3
-- week8
-	- ants P2 P3
-- week10
+	- ants P3
 	- lab09
 - week11
 	- calaculator
