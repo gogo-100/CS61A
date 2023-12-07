@@ -14,7 +14,6 @@ https://inst.eecs.berkeley.edu/~cs61a/fa22/
 	- final https://cs61a.org/resources/
 - phase2
 	- hw05 Q2 Q3
-	- ants P3
 	- lab09
 - week11
 	- calaculator
