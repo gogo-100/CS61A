@@ -16,17 +16,7 @@ https://inst.eecs.berkeley.edu/~cs61a/fa22/
 	- lab09
 - week11
 	- interpreters
-	- scheme/scheme challenge
-- week12
-	- tail calls
+	- scheme
 	- lab11
-	- disc11
 	- hw09
-- week13
-	- macros
 	- lab12
-	- disc12
-- week15
-	- final examples
-	- disc13
-2.4 4.2
