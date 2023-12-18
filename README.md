@@ -18,5 +18,4 @@ https://inst.eecs.berkeley.edu/~cs61a/fa22/
 	- interpreters
 	- scheme
 	- lab11
-	- hw09
 	- lab12
