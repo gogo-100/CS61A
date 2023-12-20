@@ -22,11 +22,10 @@ def subseqs(s):
     >>> subseqs([])
     [[]]
     """
-    if ________________:
-        ________________
+    if len(s) == 0:
+        return []
     else:
-        ________________
-        ________________
+        []
 
 
 def non_decrease_subseqs(s):
@@ -45,14 +44,14 @@ def non_decrease_subseqs(s):
     """
     def subseq_helper(s, prev):
         if not s:
-            return ____________________
+            return [[]]
         elif s[0] < prev:
             return ____________________
         else:
             a = ______________________
             b = ______________________
             return insert_into_all(________, ______________) + ________________
-    return subseq_helper(____, ____)
+    return subseq_helper(s, -100000)
 
 
 def num_trees(n):
@@ -71,11 +70,23 @@ def num_trees(n):
     1
     >>> num_trees(3)
     2
+    >>> num_trees(4)
+    5
     >>> num_trees(8)
     429
 
     """
-    "*** YOUR CODE HERE ***"
+    if n == 1 or n == 2:
+        return 1
+    i = 1
+    cnt = 0
+    while i < n-i:
+        cnt += num_trees(i) * num_trees(n-i)
+        i += 1
+    cnt *= 2
+    if i == n-i:
+        cnt += num_trees(i) * num_trees(n-i)
+    return cnt
 
 
 def partition_gen(n):
@@ -204,11 +215,11 @@ def trade(first, second):
     >>> e
     [1, 1]
     """
-    m, n = 1, 1
+    m, n = 1, 1 
 
-    equal_prefix = lambda: ______________________
-    while m!= first.length and n!= second.length and not equal_prefix():
-        if first[1]:
+    equal_prefix = lambda: sum(first[:m]) == sum(second[:n])
+    while not (m == len(first) and n == len(second))  and not equal_prefix():
+        if sum(first[:m]) < sum(second[:n]):
             m += 1
         else:
             n += 1
@@ -246,11 +257,11 @@ def shuffle(cards):
     ['AH', 'AD', 'AS', 'AC', '2H', '2D', '2S', '2C', '3H', '3D', '3S', '3C']
     """
     assert len(cards) % 2 == 0, 'len(cards) must be even'
-    half = _______________
+    half = len(cards) // 2
     shuffled = []
-    for i in _____________:
-        _________________
-        _________________
+    for i in range(half):
+        shuffled.append(cards[i])
+        shuffled.append(cards[half + i])
     return shuffled
 
 
@@ -274,14 +285,14 @@ def insert(link, value, index):
         ...
     IndexError: Out of bounds!
     """
-    if link is Link.empty and index > 0:
+    if link is Link.empty:
         raise IndexError('Out of bounds!')
     elif index > 0:
         insert(link.rest,value,index-1)
     elif index == 0 :
         node_value = link.first
         link.first = value
-        if link.rest is Link.empty:
+        if link.rest is Link.empty: # 提前把最后的那个位置移过去，此时不会有IndexError
             link.rest = Link(node_value)
         else:
             insert(link.rest,node_value,index)
@@ -303,10 +314,12 @@ def deep_len(lnk):
     >>> deep_len(levels)
     5
     """
-    if lnk is Link.empty or not isinstance(lnk, Link): 
+    if lnk is Link.empty: 
         return 0
+    elif not isinstance(lnk, Link):
+        return 1
     else:
-        return 1 + deep_len(lnk.rest) + deep_len(lnk.first)
+        return deep_len(lnk.rest) + deep_len(lnk.first)
 
 
 def make_to_string(front, mid, back, empty_repr):
@@ -336,7 +349,7 @@ def long_paths(t, n):
     """Return a list of all paths in t with length at least n.
 
     >>> long_paths(Tree(1), 0)
-    [[1]]
+    [1]
     >>> long_paths(Tree(1), 1)
     []
     >>> t = Tree(3, [Tree(4), Tree(4), Tree(5)])
@@ -361,6 +374,17 @@ def long_paths(t, n):
         12
           13
             14
+    >>> for path in long_paths(t, 1):
+    ...     print(path)
+    ...
+    [3, 4]
+    [3, 4]
+    [3, 5]
+    >>> for path in long_paths(mid, 1):
+    ...     print(path)
+    ...
+    [6, 7, 8]
+    [6, 9]
     >>> for path in long_paths(whole, 2):
     ...     print(path)
     ...
@@ -382,8 +406,17 @@ def long_paths(t, n):
     >>> long_paths(whole, 4)
     [[0, 11, 12, 13, 14]]
     """
-    "*** YOUR CODE HERE ***"
 
+    #我觉得test1返回[[1]] 不对，应该返回[1]
+    if t.is_leaf() and n <= 0:  # entire line
+        return [t.label]
+    next_route = [long_paths(subtree,n-1) for subtree in t.branches if not (subtree.is_leaf() and n > 1)]
+    res = []
+    for route in next_route:
+        res.append([t.label] + route)
+    return  res
+    
+    #
 
 def reverse_other(t):
     """Mutates the tree such that nodes on every other (odd-depth)

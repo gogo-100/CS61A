@@ -20,7 +20,7 @@
 )
 
 (define-macro (repeat-n expr n) 
-  `(replicate ,expr ,n)
+  `(replicate (lambda() ,expr) ,n)
 )
 
 (define
