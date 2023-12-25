@@ -1,0 +1,16 @@
+
+- scheme_eval_apply.py: the recursive evaluator for Scheme expressions
+- scheme_forms.py: evaluation for special forms
+- scheme_classes.py: classes that describe Scheme expressions
+- questions.scm: Scheme procedures for you to implement
+- scheme.py: the interpreter REPL
+- pair.py: defines the Pair class and the nil object
+- scheme_builtins.py: built-in Scheme procedures
+- scheme_reader.py: the reader for Scheme input (this file is obfuscated because you will implement it in lab)
+- scheme_tokens.py: the tokenizer for Scheme input
+- scheme_utils.py: functions for inspecting Scheme expressions
+- ucb.py: utility functions for use in 61A projects
+- tests.scm: a collection of test cases written in Scheme
+- ok: the autograder
+- tests: a directory of tests used by ok
+- mytests.rst: a file where you can add your own tests

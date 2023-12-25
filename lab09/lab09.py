@@ -1,3 +1,5 @@
+import copy
+
 def insert_into_all(item, nested_list):
     """Return a new list consisting of all the lists in nested_list,
     but with item added to the front of each. You can assume that
@@ -7,32 +9,40 @@ def insert_into_all(item, nested_list):
     >>> insert_into_all(0, nl)
     [[0], [0, 1, 2], [0, 3]]
     """
-    for obj in nested_list:
+    new_list = copy.deepcopy(nested_list)
+    for obj in new_list:
         if type(obj) is list:
             obj.insert(0,item)
             insert_into_all(item,obj)
+    return new_list
 
 def subseqs(s):
     """Return a nested list (a list of lists) of all subsequences of S.
     The subsequences can appear in any order. You can assume S is a list.
-
     >>> seqs = subseqs([1, 2, 3])
     >>> sorted(seqs)
     [[], [1], [1, 2], [1, 2, 3], [1, 3], [2], [2, 3], [3]]
     >>> subseqs([])
     [[]]
     """
-    if len(s) == 0:
-        return []
+    # subseqs([1,2,3]) ==  subseqs([2,3]) + insert_into_all(1,subseq[2,3])
+    if not s:
+        return [[]]
     else:
-        []
+        rest = subseqs(s[1:])
+        return  rest + insert_into_all(s[0], rest) 
 
 
 def non_decrease_subseqs(s):
     """Assuming that S is a list, return a nested list of all subsequences
     of S (a list of lists) for which the elements of the subsequence
     are strictly nondecreasing. The subsequences can appear in any order.
-
+    >>> seqs = non_decrease_subseqs([2])
+    >>> sorted(seqs)
+    [[], [2]]
+    >>> seqs = non_decrease_subseqs([3, 2])
+    >>> sorted(seqs)
+    [[], [2], [3]]
     >>> seqs = non_decrease_subseqs([1, 3, 2])
     >>> sorted(seqs)
     [[], [1], [1, 2], [1, 3], [2], [3]]
@@ -42,16 +52,17 @@ def non_decrease_subseqs(s):
     >>> sorted(seqs2)
     [[], [1], [1], [1, 1], [1, 1, 2], [1, 2], [1, 2], [2]]
     """
+     # non_decrease_subseqs([1,2,3]) ==  non_decrease_subseqs([2,3]) + if s[0]<prev insert_into_all(1,subseq[2,3])
     def subseq_helper(s, prev):
         if not s:
             return [[]]
         elif s[0] < prev:
-            return ____________________
-        else:
-            a = ______________________
-            b = ______________________
-            return insert_into_all(________, ______________) + ________________
-    return subseq_helper(s, -100000)
+            return subseq_helper(s[1:], s[0])
+        else:  #s[0] > prev
+            a = s[0]
+            b = non_decrease_subseqs(s[1:])
+            return insert_into_all(a,b) + subseq_helper(s[1:],a)
+    return subseq_helper(s[1], -1)
 
 
 def num_trees(n):
@@ -100,12 +111,19 @@ def partition_gen(n):
     [1, 1, 1, 1]
     """
     def yield_helper(j, k):
-        if j == 0:
-            ____________________________________________
-        elif ____________________________________________:
-            for small_part in ________________________________:
-                yield ____________________________________________
-            yield ________________________________________
+        # 分成用了至少一个k,还是一个没用
+        # 就是那个划分函数
+        if j < 0 or k == 0:
+            return []
+        else:
+            exact_match = []
+            if j == k:
+                exact_match = [[k]]
+            with_k = [ [k] + p for p in yield_helper(j-k, k)]
+            without_k = yield_helper(j, k-1)
+            return exact_match + with_k + without_k
+
+
     yield from yield_helper(n, n)
 
 
