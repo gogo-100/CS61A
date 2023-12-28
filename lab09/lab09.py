@@ -60,9 +60,9 @@ def non_decrease_subseqs(s):
             return subseq_helper(s[1:], s[0])
         else:  #s[0] > prev
             a = s[0]
-            b = non_decrease_subseqs(s[1:])
-            return insert_into_all(a,b) + subseq_helper(s[1:],a)
-    return subseq_helper(s[1], -1)
+            b = s[1:]
+            return insert_into_all(a,subseq_helper(b,a)) + non_decrease_subseqs(s[1:])
+    return subseq_helper(s, -1)
 
 
 def num_trees(n):
@@ -367,7 +367,7 @@ def long_paths(t, n):
     """Return a list of all paths in t with length at least n.
 
     >>> long_paths(Tree(1), 0)
-    [1]
+    [[1]]
     >>> long_paths(Tree(1), 1)
     []
     >>> t = Tree(3, [Tree(4), Tree(4), Tree(5)])
@@ -425,16 +425,16 @@ def long_paths(t, n):
     [[0, 11, 12, 13, 14]]
     """
 
-    #我觉得test1返回[[1]] 不对，应该返回[1]
-    if t.is_leaf() and n <= 0:  # entire line
-        return [t.label]
-    next_route = [long_paths(subtree,n-1) for subtree in t.branches if not (subtree.is_leaf() and n > 1)]
-    res = []
-    for route in next_route:
-        res.append([t.label] + route)
-    return  res
+    def path_helper(t,n):
+        if t.is_leaf() and n <= 0:  # entire line
+            yield [t.label]
+        for subtree in t.branches:
+            for route in long_paths(subtree,n-1):
+                yield [t.label] + route
     
-    #
+    return list(path_helper(t,n))
+        
+
 
 def reverse_other(t):
     """Mutates the tree such that nodes on every other (odd-depth)
