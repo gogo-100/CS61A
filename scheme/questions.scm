@@ -7,18 +7,34 @@
 ;; Returns a list of two-element lists
 (define (enumerate s)
   ; BEGIN PROBLEM 15
-	
-  )
+	(my_enumerate s 0)
+ )
+ 
+ (define (my_enumerate s index)
+  ; BEGIN PROBLEM 15
+	(cond ((null? s) nil)
+		  (else (cons (list index (car s))(my_enumerate (cdr s) (+ index 1)))))
+ )
   ; END PROBLEM 15
-
+  
+(define (interleave lst1 lst2) 
+	(cond ((null? lst1) lst2)
+		  ((null? lst2) lst1)
+		  (else (cons (car lst1) (cons (car lst2) (interleave (cdr lst1)(cdr lst2)))))
+	)
+)
 ;; Problem 16
 
 ;; Merge two lists LIST1 and LIST2 according to ORDERED? and return
 ;; the merged lists.
 (define (merge ordered? list1 list2)
   ; BEGIN PROBLEM 16
-  'replace-this-line
-  )
+  (cond ((null? list1) list2)
+		  ((null? list2) list1)
+		  ((ordered? (car list1) (car list2)) (cons (car list1) (merge ordered? (cdr list1) list2)))
+		  (else (cons (car list2) (merge ordered? list1(cdr list2))))
+	)
+ )
   ; END PROBLEM 16
 
 ;; Optional Problem 2
