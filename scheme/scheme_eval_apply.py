@@ -32,6 +32,11 @@ def scheme_eval(expr, env, _=None):  # Optional third argument is ignored
     first, rest = expr.first, expr.rest
     if scheme_symbolp(first) and first in scheme_forms.SPECIAL_FORMS:
         return scheme_forms.SPECIAL_FORMS[first](rest, env)
+    elif not isinstance(first, Pair) and isinstance(env.lookup(first), MacroProcedure):
+        # BEGIN OPTIONAL 1
+        res = scheme_apply(env.lookup(first), rest, env)
+        return scheme_eval(res,env)
+        # END OPTIONAL 1
     else:
         # BEGIN PROBLEM 3
         res = expr.map(lambda x:scheme_eval(x,env=env))
@@ -66,7 +71,7 @@ def scheme_apply(procedure, args, env):
         new_frame = procedure.env.make_child_frame(procedure.formals,args)
         return eval_all(procedure.body,new_frame)
         # END PROBLEM 9
-    elif isinstance(procedure, MuProcedure):
+    elif isinstance(procedure, MuProcedure) or isinstance(procedure,MacroProcedure):
         # BEGIN PROBLEM 11
         new_frame = env.make_child_frame(procedure.formals,args)
         return eval_all(procedure.body,new_frame)

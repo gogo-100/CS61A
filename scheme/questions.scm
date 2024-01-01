@@ -52,37 +52,44 @@
 (define (let-to-lambda expr)
   (cond ((atom? expr)
          ; BEGIN OPTIONAL PROBLEM 2
-         'replace-this-line
+			expr
          ; END OPTIONAL PROBLEM 2
          )
         ((quoted? expr)
          ; BEGIN OPTIONAL PROBLEM 2
-         'replace-this-line
+          ;(let-to-lambda expr)
+		  expr
          ; END OPTIONAL PROBLEM 2
          )
         ((or (lambda? expr)
              (define? expr))
-         (let ((form   (car expr))
-               (params (cadr expr))
-               (body   (cddr expr)))
-           ; BEGIN OPTIONAL PROBLEM 2
-           'replace-this-line
+			 ; '(lambda (x) a (let ((a x)) a))
+         (let ((form   (car expr))    ;lambda
+               (params (cadr expr))   ; (x)
+               (body   (cddr expr)))  ;(a (let ((a x)) a))
+           ; BEGIN OPTIONAL PROBLEM 2   (lambda (x) a ((lambda (a) a) x))
+           (cons form (cons params (map let-to-lambda body)))
            ; END OPTIONAL PROBLEM 2
            ))
         ((let? expr)
-         (let ((values (cadr expr))
-               (body   (cddr expr)))
+         (let ((values (cadr expr)) ;(values ((a 1) (b 2)))
+               (body   (cddr expr))) ;(body (+ a b))
            ; BEGIN OPTIONAL PROBLEM 2
-           'replace-this-line
-           ; END OPTIONAL PROBLEM 2
+		   ; ((lambda (a b) (+ a b)) 1 2)
+		   ; zip values   ((a b) (1 2))
+		   (cons (cons 'lambda (cons (car (zip values)) (map let-to-lambda body) )) (map let-to-lambda (cadr (zip values))))
+		   ;(let-to-lambda (cadr (zip values)))
+		   ; END OPTIONAL PROBLEM 2
            ))
         (else
          ; BEGIN OPTIONAL PROBLEM 2
-         'replace-this-line
+         (cons (car expr) (map let-to-lambda (cdr expr)))
          ; END OPTIONAL PROBLEM 2
          )))
 
 ; Some utility functions that you may find useful to implement for let-to-lambda
 
 (define (zip pairs)
-  'replace-this-line)
+	(list (map car pairs)(map cadr pairs)) 
+)
+
