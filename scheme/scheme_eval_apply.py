@@ -11,7 +11,7 @@ import scheme_forms
 ##############
 
 
-def scheme_eval(expr, env, _=None):  # Optional third argument is ignored
+def scheme_eval(expr, env, tail=None):  # Optional third argument is ignored
     """Evaluate Scheme expression EXPR in Frame ENV.
 
     >>> expr = read_line('(+ 2 2)')
@@ -99,7 +99,10 @@ def eval_all(expressions, env):
     res = None
     ptr = expressions
     while ptr is not nil:
-        res =  scheme_eval(ptr.first, env)
+        if ptr.rest is nil:
+            res = scheme_eval(ptr.first,env,True)
+        else:
+            res =  scheme_eval(ptr.first, env)
         ptr = ptr.rest
     return res 
     # END PROBLEM 6
@@ -129,7 +132,14 @@ def complete_apply(procedure, args, env):
 
 
 def optimize_tail_calls(unoptimized_scheme_eval):
-    """Return a properly tail recursive version of an eval function."""
+    """Return a properly tail recursive version of an eval function.
+    我们 61A Scheme 解释器的尾调用优化方式：
+    解释器通常会构建一个新框架，
+    然后用新框架替换当前框架。
+    旧框架仍然存在，但解释器再也无法访问它（垃圾回收）因为在尾递归中旧的变量只会被用一次。
+    在23fall里这道题有更详细的背景和解释
+    同时在PPT中有需要进行修改的尾部上下文的位置介绍
+    """
     def optimized_eval(expr, env, tail=False):
         """Evaluate Scheme expression EXPR in Frame ENV. If TAIL,
         return an Unevaluated containing an expression for further evaluation.
@@ -139,7 +149,7 @@ def optimize_tail_calls(unoptimized_scheme_eval):
 
         result = Unevaluated(expr, env)
         # BEGIN PROBLEM EC
-        while isinstance(result, Unevaluated):
+        while isinstance(result, Unevaluated): 
             result = unoptimized_scheme_eval(result.expr, result.env)
         return result
         # END PROBLEM EC
@@ -149,4 +159,4 @@ def optimize_tail_calls(unoptimized_scheme_eval):
 # Uncomment the following line to apply tail call optimization #
 ################################################################
 
-#scheme_eval = optimize_tail_calls(scheme_eval)
+scheme_eval = optimize_tail_calls(scheme_eval)
